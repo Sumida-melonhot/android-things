@@ -1,27 +1,20 @@
 package com.sumida.owl.owl;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Locale;
 
 import static android.content.ContentValues.TAG;
 
 import com.google.android.things.pio.Gpio;
 import com.google.android.things.pio.PeripheralManager;
-import com.sumida.owl.owl.TearControler;
-import com.sumida.owl.owl.TTSControler;
 
 
 /**
