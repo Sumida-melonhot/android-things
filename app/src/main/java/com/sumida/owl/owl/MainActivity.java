@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -43,10 +44,7 @@ import com.sumida.owl.owl.TTSControler;
  * @see <a href="https://github.com/androidthings/contrib-drivers#readme">https://github.com/androidthings/contrib-drivers#readme</a>
  */
 public class MainActivity extends Activity {
-
-    private static final String TEAR_GPIO_BCM = "BCM8";
-
-    private Gpio gpio;
+    private Gpio mLedGpio;
     private TextToSpeech ttsObject;
     private static final String UTTERANCE_ID = BuildConfig.APPLICATION_ID + ".UTTERANCE_ID";
 
@@ -54,13 +52,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        try{
-            PeripheralManager prphManager = PeripheralManager.getInstance();
-            gpio = prphManager.openGpio(TEAR_GPIO_BCM);
-        }catch (IOException e){
-            Log.e(TAG, e.toString());
-        }
 
         TextView textView = findViewById(R.id.test);
 
@@ -78,25 +69,25 @@ public class MainActivity extends Activity {
             }
         });
 
-        try{
-            setGpioVal(true);
-        }catch (IOException e){
-            Log.e(TAG, e.toString());
-        }
-
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ttsObject.speak("Life Life Life", TextToSpeech.QUEUE_ADD, null, UTTERANCE_ID);
+
+                try {
+                    mLedGpio = PeripheralManager.getInstance().openGpio("BCM8");
+                    mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
+                    mLedGpio.setValue(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                }, 2000);
             }
         });
     }
-
-    private void setGpioVal(boolean isVal) throws IOException{
-        gpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_HIGH);
-        gpio.setActiveType(Gpio.ACTIVE_LOW);
-
-        gpio.setValue(isVal);
-    }
-
 }
