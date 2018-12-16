@@ -83,4 +83,41 @@ public class MainActivity extends Activity {
             }
         });
     }
+
+    private void ttsStart(final String ttsData){
+        if(ttsData.isEmpty()){
+            return;
+        }
+        ttsObject = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if(status == TextToSpeech.SUCCESS){
+                    ttsObject.setLanguage(Locale.US);
+                    ttsObject.setPitch(1f);
+                    ttsObject.setSpeechRate(1f);
+                }else{
+                    ttsObject = null;
+                }
+
+                ttsObject.speak(ttsData, TextToSpeech.QUEUE_ADD, null, UTTERANCE_ID);
+
+            }
+        });
+    }
+
+    private void onTears(final String bcmStr, boolean isVal, long delayTime){
+        try{
+            mLedGpio = PeripheralManager.getInstance().openGpio(bcmStr);
+            mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
+            mLedGpio.setValue(isVal);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        }, delayTime);
+    }
 }
