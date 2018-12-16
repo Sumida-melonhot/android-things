@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.things.contrib:driver-adc-2.0">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/driver-adc-2.0.aar/922a0a26b49f01d65250ac701b2f7e9e/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/driver-adc-2.0.aar/922a0a26b49f01d65250ac701b2f7e9e/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/driver-adc-2.0.aar/922a0a26b49f01d65250ac701b2f7e9e/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.things.contrib/driver-adc/2.0/2c9680ecbb001f42d26fbdff72b2569ad8861855/driver-adc-2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
